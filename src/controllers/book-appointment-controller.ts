@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express-serve-static-core";
 import { insertAppointment } from "../services/appointment-service";
+import { validate as isUuid } from 'uuid'
 
 export async function bookAppointmentController(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
@@ -13,6 +14,11 @@ export async function bookAppointmentController(req: Request, res: Response, nex
         });
       }
       
+      if(!isUuid(customerId) || !isUuid(operatorId)){
+        res.status(400).send({
+          message: 'Send valid uuids'
+        });
+      }
       const startDateObj = new Date(starttime);
 
       const endDateObj = new Date(startDateObj);;

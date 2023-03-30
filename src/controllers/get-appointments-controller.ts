@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express-serve-static-core";
 import { getAllAppointmetsByOpertaor, getFreeOperatorSlots } from "../services/appointment-service";
+import { validate as isUuid } from 'uuid'
 
 export async function getAppointmetsByOperatorId(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
@@ -8,6 +9,12 @@ export async function getAppointmetsByOperatorId(req: Request, res: Response, ne
       if(!operatorId) {
         res.status(400).send({
           message: 'Request parameters are missing'
+        });
+      }
+
+      if(!isUuid(operatorId)){
+        res.status(400).send({
+          message: 'Send valid uuids'
         });
       }
 

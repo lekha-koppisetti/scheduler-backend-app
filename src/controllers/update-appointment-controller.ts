@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express-serve-static-core";
 import { deleteAppointment, updateAppointment } from "../services/appointment-service";
+import { validate as isUuid } from 'uuid'
 
 export async function cancelAppointment(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
@@ -8,6 +9,12 @@ export async function cancelAppointment(req: Request, res: Response, next: NextF
       if(!appointmentId) {
         res.status(400).send({
           message: 'Request parameters are missing'
+        });
+      }
+
+      if(!isUuid(appointmentId)){
+        res.status(400).send({
+          message: 'Send valid uuids'
         });
       }
 
@@ -29,6 +36,12 @@ export async function rescheduleAppointment(req: Request, res: Response, next: N
       if(!appointmentId || !starttime) {
         res.status(400).send({
           message: 'Request parameters are missing'
+        });
+      }
+      
+      if(!isUuid(appointmentId)){
+        res.status(400).send({
+          message: 'Send valid uuids'
         });
       }
       

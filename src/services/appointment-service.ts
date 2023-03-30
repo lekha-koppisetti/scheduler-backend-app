@@ -58,7 +58,7 @@ export async function getAllAppointmetsByOpertaor(
   const results: DbAppointment[] = await pg
     .table<DbAppointment>('appointments')
     .where("operatorId", operatorId)
-    .orderBy('updatedAt', 'desc')
+    .orderBy('starttime')
     .select(APPOINTMENT_TABLE_FIELDS);
   const updatedResults: SlotAppointment[] = [];
   for(const appointment of results) {
