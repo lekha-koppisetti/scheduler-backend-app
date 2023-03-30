@@ -135,6 +135,14 @@
 - `Knex` - `Knex is a JavaScript library that provides a SQL query builder and an ORM (Object-Relational Mapping) for Node.js. It is used for interfacing with SQL databases such as PostgreSQL. Using Knex, we can do the migrations as well.`
 
 
+## Database design and queries
+
+appointments table - id, customerId, operatorId, starttime, endtime, createdAt, updatedAt
+
+checking whether slot is available or not by checking starttime and endtime ranges. Please refer to line no : 24 in appointment-service.ts
+
+To get the free slots, I am dynamically calculating free slots using 24 size array for each day by tracking the free slots.
+
 ## Deployment  - Using Google Cloud Run
 
 - `gcloud auth login`
