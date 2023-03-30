@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express-serve-static-core";
 import { deleteAppointment, updateAppointment } from "../services/appointment-service";
-import { validate as isUuid } from 'uuid'
+import { validate as isUuid } from 'uuid';
+import * as moment from 'moment';
 
 export async function cancelAppointment(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
@@ -44,7 +45,15 @@ export async function rescheduleAppointment(req: Request, res: Response, next: N
           message: 'Send valid uuids'
         });
       }
-      
+
+      const isValid = moment(starttime, moment.ISO_8601, true).isValid();
+
+      if(!isValid) {
+        res.status(400).send({
+          message: 'Send Date in ISO format'
+        });
+      }
+
       const startDateObj = new Date(starttime);
       const endDateObj = new Date(startDateObj);;
       endDateObj.setHours(endDateObj.getHours() + 1);
