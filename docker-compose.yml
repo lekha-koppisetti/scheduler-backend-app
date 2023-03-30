@@ -1,0 +1,40 @@
+version: '3'
+services:
+  # backend:
+  #   networks: [scheduler-network]
+  #   build: .
+  #   ports:
+  #    - 3000:3000
+  #   volumes:
+  #    - .:/usr/src/app
+  #    - /usr/src/app/node_modules
+  #   depends_on:
+  #     - postgres
+
+  postgres:
+    networks: [scheduler-network]
+    image: postgres:11.5
+    ports:
+      - '5432:5432'
+    volumes:
+      - scheduler-app-postgres:/var/lib/postgresql/data
+
+  scheduler-pgadmin:
+    networks: [scheduler-network]
+    container_name: scheduler-app-db-pgadmin
+    image: dpage/pgadmin4:4.21
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+    volumes:
+      - scheduler-app-pgadmin:/var/lib/pgadmin
+    ports:
+      - '${PGADMIN_PORT:-9693}:80'
+    restart: unless-stopped
+
+volumes:
+  scheduler-app-postgres:
+  scheduler-app-pgadmin:
+
+networks:
+  scheduler-network:
