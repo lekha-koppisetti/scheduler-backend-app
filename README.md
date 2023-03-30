@@ -132,6 +132,8 @@
 
 - `Postgres` - `Using Google cloud postgres instance`
 
+- `TypeScript`
+
 - `Knex` - `Knex is a JavaScript library that provides a SQL query builder and an ORM (Object-Relational Mapping) for Node.js. It is used for interfacing with SQL databases such as PostgreSQL. Using Knex, we can do the migrations as well.`
 
 
