@@ -24,6 +24,6 @@ app.put("/appointment/cancel/:id", cancelAppointment);
 app.get("/appointments/:operatorId", getAppointmetsByOperatorId);
 
 
-app.listen(3000, function(){
+app.listen(8080, function(){
   console.log("SERVER STARTED ON localhost:3000");     
 })
