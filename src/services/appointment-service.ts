@@ -164,7 +164,7 @@ export async function getFreeOperatorSlots(
           start = constArr[i+1];
         }
       }
-      updatedArr.push(start+'-'+((constArr[i]+1)== 24 ? 1 : constArr[i]+1));
+      updatedArr.push(start+'-'+((constArr[i]+1)== 25 ? 1 : constArr[i]+1));
     }
    
     resultDates[key]= updatedArr;
