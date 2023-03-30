@@ -9,6 +9,10 @@ export interface DbAppointment {
     updatedAt : Date;
 }
 
+export interface SlotAppointment extends DbAppointment {
+    slot: string;
+}
+
 export const APPOINTMENT_TABLE_FIELDS = ["id","customerId", 
                                    "operatorId","starttime","endtime","createdAt",
                                    "updatedAt"]

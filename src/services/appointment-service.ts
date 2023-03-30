@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid'
 import { pg } from "../database-config";
-import { APPOINTMENT_TABLE_FIELDS, DbAppointment } from '../models/db-appointment';
+import { APPOINTMENT_TABLE_FIELDS, DbAppointment, SlotAppointment } from '../models/db-appointment';
 
 export async function insertAppointment(
   customerId: string,
@@ -54,12 +54,19 @@ export async function insertAppointment(
 
 export async function getAllAppointmetsByOpertaor(
   operatorId: string
-): Promise<DbAppointment | null> {
-  return (await pg
+): Promise<SlotAppointment[] | null> {
+  const results: DbAppointment[] = await pg
     .table<DbAppointment>('appointments')
     .where("operatorId", operatorId)
     .orderBy('updatedAt', 'desc')
-    .select(APPOINTMENT_TABLE_FIELDS));
+    .select(APPOINTMENT_TABLE_FIELDS);
+  const updatedResults: SlotAppointment[] = [];
+  for(const appointment of results) {
+    const app : SlotAppointment = appointment as SlotAppointment;
+    app.slot = new Date(appointment.starttime).getUTCHours() + '-' + new Date(appointment.endtime).getUTCHours();
+    updatedResults.push(app);
+  }
+  return updatedResults;
 }
 
 export async function deleteAppointment(
