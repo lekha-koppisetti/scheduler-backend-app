@@ -1,8 +1,7 @@
 import {knex} from 'knex';
 
 export const connectionObj = {
-  // host: '35.200.243.206',
-  host : '192.168.1.3',
+  host : '35.200.243.206',
   user: 'postgres',
   password: 'admin',
   database: 'postgres',

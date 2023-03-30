@@ -25,5 +25,5 @@ app.get("/appointments/:operatorId", getAppointmetsByOperatorId);
 
 
 app.listen(8080, function(){
-  console.log("SERVER STARTED ON localhost:3000");     
+  console.log("SERVER STARTED ON localhost:8080");     
 })

@@ -130,7 +130,7 @@ export async function getFreeOperatorSlots(
   const resultDates : any = {
   }
   for(const appointment of results) {
-   const isostr = appointment.starttime.toISOString()
+   const isostr = appointment.starttime.toISOString();
     const startDate = new Date(isostr);
     const year = startDate.getFullYear();
     const month = startDate.getMonth();
@@ -148,6 +148,7 @@ export async function getFreeOperatorSlots(
   for(const key of Object.keys(resultDates)) {
     const value = resultDates[key];
     let constArr: number[] = [];
+    // Pushing all the free slot starttimes into the array
     for(let i=1;i<=24;i++) {
       if(value.indexOf(i) < 0) {
         constArr.push(i);
@@ -163,7 +164,7 @@ export async function getFreeOperatorSlots(
           start = constArr[i+1];
         }
       }
-      updatedArr.push(start+'-'+(constArr[i]+1)%24);
+      updatedArr.push(start+'-'+((constArr[i]+1)== 24 ? 1 : constArr[i]+1));
     }
    
     resultDates[key]= updatedArr;
