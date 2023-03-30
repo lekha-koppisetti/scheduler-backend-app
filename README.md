@@ -9,8 +9,6 @@
 
 - `Install Docker`
 
-- `update host to  your ip-address in database-config.ts`
-
 - `Uncomment docker-compose.yml`
 
 - `Go to project directory and  run 'docker-compose up'`
